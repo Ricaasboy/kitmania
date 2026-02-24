@@ -73,27 +73,6 @@ $isLoggedIn = isset($_SESSION['user_id']);
                                 </li>
 
                             <?php endif; ?>
-
-                            <li class="lan_area">
-                                <a href="#">
-                                    <i class="fa fa-language"></i>
-                                    <?php echo t('Language'); ?>
-                                    <i class="fa fa-caret-down"></i>
-                                </a>
-                                <ul class="csub-menu">
-                                    <li>
-                                        <a href="?lang=en" class="<?= $lang === 'en' ? 'active' : '' ?>">
-                                            <?= t('English') ?>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="?lang=pt" class="<?= $lang === 'pt' ? 'active' : '' ?>">
-                                            <?= t('Português') ?>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-
                             <li class="currency_area">
                                 <a href="#">
                                     <i class="fa fa-gg"></i> $USD <i class="fa fa-caret-down"></i>

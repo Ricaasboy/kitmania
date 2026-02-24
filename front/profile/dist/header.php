@@ -1,5 +1,5 @@
 <?php
-include("../../../back/conn.php")
+include("../../../back/conn.php");
 ?>
 
 <link rel="stylesheet" href="icons" />
@@ -122,7 +122,7 @@ include("../../../back/conn.php")
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="settings.php" class="nav-link">
             <i class="nav-icon bi bi-gear-fill"></i>
             <p>
               <?php echo $lang === 'en' ? 'Settings' : 'Configurações'; ?>

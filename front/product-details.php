@@ -1,15 +1,26 @@
-<?php include ("../back/conn.php") ?>
+<?php include("../back/conn.php") ?>
 
 <!DOCTYPE HTML>
 <html lang="en-US">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>FancyShop - Ecommerce Bootstrap Template</title>
-		<link href="https://fonts.googleapis.com/css?family=Lato:300,400,500,600,700,800" rel="stylesheet"> 
-	</head>
 
-	<body>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>FancyShop - Ecommerce Bootstrap Template</title>
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,500,600,700,800" rel="stylesheet">
+	<link rel="stylesheet" href="../assets/css/animate.css" />
+	<link rel="stylesheet" href="../assets/css/owl.theme.default.min.css" />
+	<link rel="stylesheet" href="../assets/css/owl.carousel.min.css" />
+	<link rel="stylesheet" href="../assets/css/meanmenu.min.css" />
+	<link rel="stylesheet" href="../assets/css/venobox.css" />
+	<link rel="stylesheet" href="../assets/css/font-awesome.css" />
+	<link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="../assets/css/style.css" />
+	<link rel="stylesheet" href="../assets/css/responsive.css" />
+	<link rel="stylesheet" href="../assets/icons/bootstrap-icons.css" />
+</head>
+
+<body>
 	<!--  Start Header  -->
 	<header id="header_area">
 		<div class="header_top_area">
@@ -23,7 +34,7 @@
 							</div>
 						</div>
 					</div>
-					
+
 					<div class="col-xs-12 col-sm-6">
 						<ul class="hdr_tp_right text-right">
 							<li class="account_area"><a href="login.html"><i class="fa fa-lock"></i> My Account</a></li>
@@ -31,36 +42,36 @@
 								<ul class="csub-menu">
 									<li><a href="#">English</a></li>
 									<li><a href="#">French</a></li>
-									<li><a href="#">Portuguese</a></li>		
+									<li><a href="#">Portuguese</a></li>
 								</ul>
 							</li>
 							<li class="currency_area"><a href="#"><i class="fa fa-gg "></i> $USD <i class="fa fa-caret-down"></i></a>
 								<ul class="csub-menu">
 									<li><a href="#">€Euro</a></li>
-									<li><a href="#">৳BDT</a></li>		
-								</ul>								
+									<li><a href="#">৳BDT</a></li>
+								</ul>
 							</li>
 						</ul>
 					</div>
 				</div>
 			</div>
 		</div> <!--  HEADER START  -->
-		
+
 		<div class="header_btm_area">
 			<div class="container">
-				<div class="row">		
-					<div class="col-xs-12 col-sm-12 col-md-3"> 
-						<a class="logo" href="index.html"> <img alt="" src="../assets/img/logo.png"></a> 
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-3">
+						<a class="logo" href="index.html"> <img alt="" src="../assets/img/logo.png"></a>
 					</div><!--  End Col -->
-					
+
 					<div class="col-xs-12 col-sm-12 col-md-9 text-right">
 						<div class="menu_wrap">
 							<div class="main-menu">
 								<nav>
 									<ul>
-										<li><a href="index.html">home</a>					
-										</li>									
-										
+										<li><a href="index.html">home</a>
+										</li>
+
 										<li><a href="shop.html">Shop <i class="fa fa-angle-down"></i></a>
 											<!-- Sub Menu -->
 											<ul class="sub-menu">
@@ -80,9 +91,9 @@
 													<a href="#">Collections</a>
 													<a href="#">T-Shirts</a>
 													<a href="#">jens pant’s</a>
-													<a href="#">sports shoes</a>												
+													<a href="#">sports shoes</a>
 												</div>
-												
+
 												<div class="mm-column mm-column-link float-left">
 													<h3>Women</h3>
 													<a href="#">Blazers</a>
@@ -90,9 +101,9 @@
 													<a href="#">Collections</a>
 													<a href="#">T-Shirts</a>
 													<a href="#">jens pant’s</a>
-													<a href="#">sports shoes</a>												
+													<a href="#">sports shoes</a>
 												</div>
-												
+
 												<div class="mm-column mm-column-link float-left">
 													<h3>Jackets</h3>
 													<a href="#">Blazers</a>
@@ -100,8 +111,8 @@
 													<a href="#">Collections</a>
 													<a href="#">T-Shirts</a>
 													<a href="#">jens pant’s</a>
-													<a href="#">sports shoes</a>	
-												</div>						
+													<a href="#">sports shoes</a>
+												</div>
 
 												<div class="mm-column mm-column-link float-left">
 													<h3>jens pant’s</h3>
@@ -110,7 +121,7 @@
 													<a href="#">Collections</a>
 													<a href="#">T-Shirts</a>
 													<a href="#">jens pant’s</a>
-													<a href="#">sports shoes</a>	
+													<a href="#">sports shoes</a>
 												</div>
 
 											</div>
@@ -125,9 +136,9 @@
 													<a href="#">Collections</a>
 													<a href="#">T-Shirts</a>
 													<a href="#">jens pant’s</a>
-													<a href="#">sports shoes</a>	
+													<a href="#">sports shoes</a>
 												</div>
-												
+
 												<div class="mm-column mm-column-link float-left">
 													<h3>T-Shirts</h3>
 													<a href="#">Blazers</a>
@@ -135,8 +146,8 @@
 													<a href="#">Collections</a>
 													<a href="#">T-Shirts</a>
 													<a href="#">jens pant’s</a>
-													<a href="#">sports shoes</a>	
-												</div>					
+													<a href="#">sports shoes</a>
+												</div>
 
 												<div class="mm-column mm-column-link float-left">
 													<h3>Jackets</h3>
@@ -145,12 +156,12 @@
 													<a href="#">Collections</a>
 													<a href="#">T-Shirts</a>
 													<a href="#">jens pant’s</a>
-													<a href="#">sports shoes</a>	
-												</div>												
-			
+													<a href="#">sports shoes</a>
+												</div>
+
 											</div>
 										</li>
-										
+
 										<li><a href="#">pages <i class="fa fa-angle-down"></i></a>
 											<!-- Sub Menu -->
 											<ul class="sub-menu">
@@ -166,12 +177,12 @@
 										<li><a href="contact.html">contact</a></li>
 									</ul>
 								</nav>
-							</div> <!--  End Main Menu -->					
+							</div> <!--  End Main Menu -->
 
 							<div class="mobile-menu text-right ">
 								<nav>
 									<ul>
-										<li><a href="index.html">home</a></li>																		
+										<li><a href="index.html">home</a></li>
 										<li><a href="#">Shop</a>
 											<!-- Sub Menu -->
 											<ul>
@@ -181,7 +192,7 @@
 												<li><a href="wishlist.html">Wishlist</a></li>
 											</ul>
 										</li>
-										<li><a href="#">Men</a>																		
+										<li><a href="#">Men</a>
 											<ul>
 												<li><a href="#">Blazers</a></li>
 												<li><a href="#">Jackets</a></li>
@@ -189,9 +200,9 @@
 												<li><a href="#">T-Shirts</a></li>
 												<li><a href="#">jens pant’s</a></li>
 												<li><a href="#">sports shoes</a></li>
-											</ul>																				
+											</ul>
 										</li>
-										
+
 										<li><a href="#">Women</a>
 											<ul>
 												<li><a href="#">gagets</a></li>
@@ -202,8 +213,8 @@
 												<li><a href="#">sports items</a></li>
 											</ul>
 										</li>
-									
-										<li><a href="#">pages</a>											
+
+										<li><a href="#">pages</a>
 											<ul>
 												<li><a href="blog.html">Blog</a></li>
 												<li><a href="blog-details.html">Blog Details</a></li>
@@ -216,7 +227,7 @@
 									</ul>
 								</nav>
 							</div> <!--  End mobile-menu -->
-							
+
 							<div class="right_menu">
 								<ul class="nav justify-content-end">
 									<li>
@@ -225,22 +236,22 @@
 											<div class="search-box">
 												<form action="#" method="get">
 													<div class="input-group">
-														<input type="text" class="form-control"  placeholder="enter keyword"/>				
-														<button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>			
+														<input type="text" class="form-control" placeholder="enter keyword" />
+														<button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
 													</div>
 												</form>
 											</div>
 										</div>
 									</li>
-									
+
 									<li>
 										<div class="cart_menu_area">
 											<div class="cart_icon">
 												<a href="#"><i class="fa fa-shopping-bag " aria-hidden="true"></i></a>
 												<span class="cart_number">2</span>
 											</div>
-											
-											
+
+
 											<!-- Mini Cart Wrapper -->
 											<div class="mini-cart-wrapper">
 												<!-- Product List -->
@@ -264,26 +275,26 @@
 												</div>
 												<!-- Sub Total -->
 												<div class="mc-subtotal fix">
-													<h4>Subtotal <span>$50.00</span></h4>												
+													<h4>Subtotal <span>$50.00</span></h4>
 												</div>
 												<!-- Cart Button -->
 												<div class="mc-button">
 													<a href="#" class="checkout_btn">checkout</a>
 												</div>
-											</div>											
-										</div>	
-										
+											</div>
+										</div>
+
 									</li>
 								</ul>
-							</div>							
+							</div>
 						</div>
-					</div><!--  End Col -->										
+					</div><!--  End Col -->
 				</div>
 			</div>
 		</div>
 	</header>
 	<!--  End Header  -->
-	
+
 
 	<!-- Page item Area -->
 	<div id="page_item_area">
@@ -291,18 +302,18 @@
 			<div class="row">
 				<div class="col-sm-6 text-left">
 					<h3>Shop Details</h3>
-				</div>		
+				</div>
 
 				<div class="col-sm-6 text-right">
 					<ul class="p_items">
 						<li><a href="#">home</a></li>
 						<li><a href="#">category</a></li>
 						<li><span>Product Title</span></li>
-					</ul>					
-				</div>	
-					
-			
-				
+					</ul>
+				</div>
+
+
+
 			</div>
 		</div>
 	</div>
@@ -314,7 +325,7 @@
 				<!-- Product Details Image -->
 				<div class="col-md-6 col-xs-12">
 					<div class="pd_img fix">
-						<a class="venobox" href="../assets/img/product/3.jpg"><img src="../assets/img/product/3.jpg" alt=""/></a>
+						<a class="venobox" href="../assets/img/product/3.jpg"><img src="../assets/img/product/3.jpg" alt="" /></a>
 					</div>
 				</div>
 				<!-- Product Details Content -->
@@ -340,7 +351,7 @@
 						</div>
 						<div class="pd_text">
 							<h4>overview:</h4>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tem portul indunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud  exercitation ullamco laboris nisi ut aliquip.</p>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tem portul indunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
 						</div>
 						<div class="pd_img_size fix">
 							<h4>size:</h4>
@@ -384,83 +395,82 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="row">
-				<div class="col-xs-12">					
-					<div class="pd_tab_area fix">									
+				<div class="col-xs-12">
+					<div class="pd_tab_area fix">
 						<ul class="pd_tab_btn nav nav-tabs" role="tablist">
-						  <li>
-							<a class="active" href="#description" role="tab" data-toggle="tab">Description</a>
-						  </li>
-						  <li>
-							<a href="#information" role="tab" data-toggle="tab">Information</a>
-						  </li>
-						  <li>
-							<a href="#reviews" role="tab" data-toggle="tab">Reviews</a>
-						  </li>
+							<li>
+								<a class="active" href="#description" role="tab" data-toggle="tab">Description</a>
+							</li>
+							<li>
+								<a href="#information" role="tab" data-toggle="tab">Information</a>
+							</li>
+							<li>
+								<a href="#reviews" role="tab" data-toggle="tab">Reviews</a>
+							</li>
 						</ul>
 
 						<!-- Tab panes -->
 						<div class="tab-content">
 							<div role="tabpanel" class="tab-pane fade show active" id="description">
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
-								incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-								exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure 
-								dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-								Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit 
-								anim id est laborum.</p>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+									incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+									exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+									dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+									Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+									anim id est laborum.</p>
 								<ul>
 									<li>Lorem ipsum dolor sit amet, consectetur product</li>
 									<li>Duis aute irure dolor in reprehenderit in voluptate velit esse</li>
 									<li>Excepteur sinted occaecat cupidatat non proident products</li>
 									<li>Voluptate velit esse cillum.</li>
-								</ul>					  
+								</ul>
 							</div>
 
 							<div role="tabpanel" class="tab-pane fade" id="information">
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
-								incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-								exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-								dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>										  
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+									incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+									exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+									dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
 							</div>
 
-								<div role="tabpanel" class="tab-pane fade" id="reviews">
-									<div class="pda_rtng_area fix">
-										<h4>4.5 <span>(Overall)</span></h4>
-										<span>Based on 9 Comments</span>
-									</div>
-									<div class="rtng_cmnt_area fix">
-										<div class="single_rtng_cmnt">
-											<div class="rtngs">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star-o"></i>
+							<div role="tabpanel" class="tab-pane fade" id="reviews">
+								<div class="pda_rtng_area fix">
+									<h4>4.5 <span>(Overall)</span></h4>
+									<span>Based on 9 Comments</span>
+								</div>
+								<div class="rtng_cmnt_area fix">
+									<div class="single_rtng_cmnt">
+										<div class="rtngs">
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star-o"></i>
 											<span>(4)</span>
-											</div>
-											<div class="rtng_author">
-												<h3>John Doe</h3>
-												<span>11:20</span>
-												<span>6 January 2017</span>
-											</div>
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nost rud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nost.</p>
 										</div>
-
+										<div class="rtng_author">
+											<h3>John Doe</h3>
+											<span>11:20</span>
+											<span>6 January 2017</span>
+										</div>
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nost rud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nost.</p>
 									</div>
-									<div class="col-md-6 rcf_pdnglft">
-										<div class="rtng_cmnt_form_area fix">
-											<h3>Add your Comments</h3>
-											<div class="rtng_form">
-												<form action="#">
-													<div class="input-area"><input type="text" placeholder="Type your name" /></div>
-													<div class="input-area"><input type="text" placeholder="Type your email address" /></div>
-													<div class="input-area"><textarea name="message" placeholder="Write a review"></textarea></div>
-													<input class="btn border-btn" type="submit" value="Add Review" />
-												</form>
-											</div>
+
+								</div>
+								<div class="col-md-6 rcf_pdnglft">
+									<div class="rtng_cmnt_form_area fix">
+										<h3>Add your Comments</h3>
+										<div class="rtng_form">
+											<form action="#">
+												<div class="input-area"><input type="text" placeholder="Type your name" /></div>
+												<div class="input-area"><input type="text" placeholder="Type your email address" /></div>
+												<div class="input-area"><textarea name="message" placeholder="Write a review"></textarea></div>
+												<input class="btn border-btn" type="submit" value="Add Review" />
+											</form>
 										</div>
-									</div>				  
+									</div>
 								</div>
 							</div>
 						</div>
@@ -468,193 +478,197 @@
 				</div>
 			</div>
 		</div>
+	</div>
 
 
 	<!-- Related Product Area -->
 	<div class="related_prdct_area text-center">
-		<div class="container">		
-				<!-- Section Title -->
-				<div class="rp_title text-center"><h3>Related products</h3></div>
-				
-				<div class="row">
-					<div class="col-lg-3 col-md-4 col-sm-6">
-						<div class="single_product">
-							<div class="product_image">
-								<img src="../assets/img/product/1.jpg" alt=""/>
-								<div class="box-content">
-									<a href="#"><i class="fa fa-heart-o"></i></a>
-									<a href="#"><i class="fa fa-cart-plus"></i></a>
-									<a href="#"><i class="fa fa-search"></i></a>
-								</div>										
-							</div>
+		<div class="container">
+			<!-- Section Title -->
+			<div class="rp_title text-center">
+				<h3>Related products</h3>
+			</div>
 
-							<div class="product_btm_text">
-								<h4><a href="#">Product Title</a></h4>
-								<span class="price">$123.00</span>
+			<div class="row">
+				<div class="col-lg-3 col-md-4 col-sm-6">
+					<div class="single_product">
+						<div class="product_image">
+							<img src="../assets/img/product/1.jpg" alt="" />
+							<div class="box-content">
+								<a href="#"><i class="fa fa-heart-o"></i></a>
+								<a href="#"><i class="fa fa-cart-plus"></i></a>
+								<a href="#"><i class="fa fa-search"></i></a>
 							</div>
-						</div>								
-					</div> <!-- End Col -->			
+						</div>
 
-					<div class="col-lg-3 col-md-4 col-sm-6">
-						<div class="single_product">
-							<div class="product_image">
-								<img src="../assets/img/product/2.jpg" alt=""/>
-								<div class="box-content">
-									<a href="#"><i class="fa fa-heart-o"></i></a>
-									<a href="#"><i class="fa fa-cart-plus"></i></a>
-									<a href="#"><i class="fa fa-search"></i></a>
-								</div>										
-							</div>
+						<div class="product_btm_text">
+							<h4><a href="#">Product Title</a></h4>
+							<span class="price">$123.00</span>
+						</div>
+					</div>
+				</div> <!-- End Col -->
 
-							<div class="product_btm_text">
-								<h4><a href="#">Product Title</a></h4>
-								<span class="price">$123.00</span>
+				<div class="col-lg-3 col-md-4 col-sm-6">
+					<div class="single_product">
+						<div class="product_image">
+							<img src="../assets/img/product/2.jpg" alt="" />
+							<div class="box-content">
+								<a href="#"><i class="fa fa-heart-o"></i></a>
+								<a href="#"><i class="fa fa-cart-plus"></i></a>
+								<a href="#"><i class="fa fa-search"></i></a>
 							</div>
-						</div>								
-					</div> <!-- End Col -->				
+						</div>
 
-					<div class="col-lg-3 col-md-4 col-sm-6">
-						<div class="single_product">
-							<div class="product_image">
-								<img src="../assets/img/product/3.jpg" alt=""/>
-								<div class="box-content">
-									<a href="#"><i class="fa fa-heart-o"></i></a>
-									<a href="#"><i class="fa fa-cart-plus"></i></a>
-									<a href="#"><i class="fa fa-search"></i></a>
-								</div>										
-							</div>
+						<div class="product_btm_text">
+							<h4><a href="#">Product Title</a></h4>
+							<span class="price">$123.00</span>
+						</div>
+					</div>
+				</div> <!-- End Col -->
 
-							<div class="product_btm_text">
-								<h4><a href="#">Product Title</a></h4>
-								<span class="price">$123.00</span>
+				<div class="col-lg-3 col-md-4 col-sm-6">
+					<div class="single_product">
+						<div class="product_image">
+							<img src="../assets/img/product/3.jpg" alt="" />
+							<div class="box-content">
+								<a href="#"><i class="fa fa-heart-o"></i></a>
+								<a href="#"><i class="fa fa-cart-plus"></i></a>
+								<a href="#"><i class="fa fa-search"></i></a>
 							</div>
-						</div>								
-					</div> <!-- End Col -->			
-					
-					<div class="col-lg-3 col-md-4 col-sm-6">
-						<div class="single_product">
-							<div class="product_image">
-								<img src="img/product/4.jpg" alt=""/>
-								<div class="box-content">
-									<a href="#"><i class="fa fa-heart-o"></i></a>
-									<a href="#"><i class="fa fa-cart-plus"></i></a>
-									<a href="#"><i class="fa fa-search"></i></a>
-								</div>										
-							</div>
+						</div>
 
-							<div class="product_btm_text">
-								<h4><a href="#">Product Title</a></h4>
-								<span class="price">$123.00</span>
+						<div class="product_btm_text">
+							<h4><a href="#">Product Title</a></h4>
+							<span class="price">$123.00</span>
+						</div>
+					</div>
+				</div> <!-- End Col -->
+
+				<div class="col-lg-3 col-md-4 col-sm-6">
+					<div class="single_product">
+						<div class="product_image">
+							<img src="img/product/4.jpg" alt="" />
+							<div class="box-content">
+								<a href="#"><i class="fa fa-heart-o"></i></a>
+								<a href="#"><i class="fa fa-cart-plus"></i></a>
+								<a href="#"><i class="fa fa-search"></i></a>
 							</div>
-						</div>								
-					</div> <!-- End Col -->					
+						</div>
+
+						<div class="product_btm_text">
+							<h4><a href="#">Product Title</a></h4>
+							<span class="price">$123.00</span>
+						</div>
+					</div>
+				</div> <!-- End Col -->
 			</div>
 		</div>
 	</div>
 
-		<!--  FOOTER START  -->
-		<footer class="footer_area">
-			<div class="container">
-				<div class="row">				
-					<div class="col-md-3 col-sm-6">
-						<div class="single_ftr">
-							<h4 class="sf_title">Contacts</h4>
-							<ul>
-								<li>4060 Reppert Coal Road Jackson, MS 39201 USA</li>
-								<li>(+123) 685 78 <br> (+064) 987 245</li>
-								<li>Contact@yourcompany.com</li>
-							</ul>
+	<!--  FOOTER START  -->
+	<footer class="footer_area">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3 col-sm-6">
+					<div class="single_ftr">
+						<h4 class="sf_title">Contacts</h4>
+						<ul>
+							<li>4060 Reppert Coal Road Jackson, MS 39201 USA</li>
+							<li>(+123) 685 78 <br> (+064) 987 245</li>
+							<li>Contact@yourcompany.com</li>
+						</ul>
+					</div>
+				</div> <!--  End Col -->
+
+				<div class="col-md-3 col-sm-6">
+					<div class="single_ftr">
+						<h4 class="sf_title">Information</h4>
+						<ul>
+							<li><a href="#">About Us</a></li>
+							<li><a href="#">Delivery Information</a></li>
+							<li><a href="#">Privacy Policy</a></li>
+							<li><a href="#">Terms & Conditions</a></li>
+							<li><a href="#">Contact Us</a></li>
+						</ul>
+					</div>
+				</div> <!--  End Col -->
+
+				<div class="col-md-3 col-sm-6">
+					<div class="single_ftr">
+						<h4 class="sf_title">Services</h4>
+						<ul>
+							<li><a href="#">Returns</a></li>
+							<li><a href="#">Site Map</a></li>
+							<li><a href="#">Wish List</a></li>
+							<li><a href="#">My Account</a></li>
+							<li><a href="#">Order History</a></li>
+						</ul>
+					</div>
+				</div> <!--  End Col -->
+
+				<div class="col-md-3 col-sm-6">
+					<div class="single_ftr">
+						<h4 class="sf_title">Newsletter</h4>
+						<div class="newsletter_form">
+							<p>There are many variations of passages of Lorem Ipsum available, but the majority have </p>
+							<form method="post" class="form-inline">
+								<input name="EMAIL" id="email" placeholder="Enter Your Email" class="form-control" type="email">
+								<button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+							</form>
 						</div>
-					</div> <!--  End Col -->
-					
-					<div class="col-md-3 col-sm-6">
-						<div class="single_ftr">
-							<h4 class="sf_title">Information</h4>
-							<ul>
-								<li><a href="#">About Us</a></li>
-								<li><a href="#">Delivery Information</a></li>
-								<li><a href="#">Privacy Policy</a></li>
-								<li><a href="#">Terms & Conditions</a></li>
-								<li><a href="#">Contact Us</a></li>
-							</ul>
-						</div>
-					</div> <!--  End Col -->
-					
-					<div class="col-md-3 col-sm-6">
-						<div class="single_ftr">
-							<h4 class="sf_title">Services</h4>
-							<ul>
-								<li><a href="#">Returns</a></li>
-								<li><a href="#">Site Map</a></li>
-								<li><a href="#">Wish List</a></li>
-								<li><a href="#">My Account</a></li>
-								<li><a href="#">Order History</a></li>
-							</ul>
-						</div>
-					</div> <!--  End Col -->	
-					
-					<div class="col-md-3 col-sm-6">
-						<div class="single_ftr">
-							<h4 class="sf_title">Newsletter</h4>
-							<div class="newsletter_form">
-								<p>There are many variations of passages of Lorem Ipsum available, but the majority have </p>
-								<form method="post" class="form-inline">				
-									<input name="EMAIL" id="email" placeholder="Enter Your Email" class="form-control" type="email">
-									<button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-								</form>
-							</div>
-						</div>
-					</div> <!--  End Col -->
-					
-				</div>
+					</div>
+				</div> <!--  End Col -->
+
 			</div>
-	
-		
-			<div class="ftr_btm_area">
-				<div class="container">
-					<div class="row">
-						<div class="col-sm-4">
-							<div class="ftr_social_icon">
-								<ul>
-									<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-									<li><a href="#"><i class="fa fa-google"></i></a></li>
-									<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-									<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-									<li><a href="#"><i class="fa fa-rss"></i></a></li>
-								</ul>
-							</div>
+		</div>
+
+
+		<div class="ftr_btm_area">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="ftr_social_icon">
+							<ul>
+								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="#"><i class="fa fa-google"></i></a></li>
+								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fa fa-rss"></i></a></li>
+							</ul>
 						</div>
-						<div class="col-sm-4">
-							<p class="copyright_text text-center">&copy; 2024 All Rights Reserved FancyShop</p>
-						</div>
-						
-						<div class="col-sm-4">
-							<div class="payment_mthd_icon text-right">
-								<ul>
-									<li><i class="fa fa-cc-paypal"></i></li>
-									<li><i class="fa fa-cc-visa"></i></li>
-									<li><i class="fa fa-cc-discover"></i></li>
-									<li><i class="fa fa-cc-mastercard"></i></li>
-									<li><i class="fa fa-cc-amex"></i></li>
-								</ul>
-							</div>
+					</div>
+					<div class="col-sm-4">
+						<p class="copyright_text text-center">&copy; 2024 All Rights Reserved FancyShop</p>
+					</div>
+
+					<div class="col-sm-4">
+						<div class="payment_mthd_icon text-right">
+							<ul>
+								<li><i class="fa fa-cc-paypal"></i></li>
+								<li><i class="fa fa-cc-visa"></i></li>
+								<li><i class="fa fa-cc-discover"></i></li>
+								<li><i class="fa fa-cc-mastercard"></i></li>
+								<li><i class="fa fa-cc-amex"></i></li>
+							</ul>
 						</div>
 					</div>
 				</div>
 			</div>
-		</footer>
-		<!--  FOOTER END  -->
+		</div>
+	</footer>
+	<!--  FOOTER END  -->
 
-		<script src="../assets/js/vendor/jquery-1.12.4.min.js"></script>
-		<script src="../assets/js/bootstrap.min.js"></script>
-		<script src="../assets/js/jquery.meanmenu.min.js"></script>
-		<script src="../assets/js/jquery.mixitup.js"></script>
-		<script src="../assets/js/jquery.counterup.min.js"></script>
-		<script src="../assets/js/waypoints.min.js"></script>
-		<script src="../assets/js/wow.min.js"></script>
-		<script src="../assets/js/venobox.min.js"></script>
-		<script src="../assets/js/owl.carousel.min.js"></script>
-		<script src="../assets/js/simplePlayer.js"></script>
-		<script src="../assets/js/main.js"></script>
-	</body>
+	<script src="../assets/js/vendor/jquery-1.12.4.min.js"></script>
+	<script src="../assets/js/bootstrap.min.js"></script>
+	<script src="../assets/js/jquery.meanmenu.min.js"></script>
+	<script src="../assets/js/jquery.mixitup.js"></script>
+	<script src="../assets/js/jquery.counterup.min.js"></script>
+	<script src="../assets/js/waypoints.min.js"></script>
+	<script src="../assets/js/wow.min.js"></script>
+	<script src="../assets/js/venobox.min.js"></script>
+	<script src="../assets/js/owl.carousel.min.js"></script>
+	<script src="../assets/js/simplePlayer.js"></script>
+	<script src="../assets/js/main.js"></script>
+</body>
+
 </html>

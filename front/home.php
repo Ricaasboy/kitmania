@@ -11,6 +11,16 @@ include("../back/conn.php");
 	<title>Casa - KitMania</title>
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,500,600,700,800" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">
+	<link rel="stylesheet" href="../assets/css/animate.css" />
+	<link rel="stylesheet" href="../assets/css/owl.theme.default.min.css" />
+	<link rel="stylesheet" href="../assets/css/owl.carousel.min.css" />
+	<link rel="stylesheet" href="../assets/css/meanmenu.min.css" />
+	<link rel="stylesheet" href="../assets/css/venobox.css" />
+	<link rel="stylesheet" href="../assets/css/font-awesome.css" />
+	<link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="../assets/css/style.css" />
+	<link rel="stylesheet" href="../assets/css/responsive.css" />
+	<link rel="stylesheet" href="../assets/icons/bootstrap-icons.css" />
 </head>
 
 <body>
