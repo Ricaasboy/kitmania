@@ -2,14 +2,12 @@
 // Inclui conexão + $lang
 include("../../../back/conn.php");
 
-// =============================================
 // Línguas para as tabs
 $languages = [
   ['code' => 'pt', 'name' => 'Português'],
   ['code' => 'en', 'name' => 'English'],
 ];
 
-// =============================================
 // Produto (valores padrão ou em edição)
 $product = $product ?? [
   'id'             => null,
@@ -22,7 +20,6 @@ $product = $product ?? [
   'thumbnail'      => ''
 ];
 
-// =============================================
 // Carrega TODAS as categorias ativas
 $all_categories = [];
 
@@ -83,6 +80,9 @@ $main_categories = array_filter($all_categories, fn($c) => $c['parent_id'] === n
       <div class="app-content-header">
         <div class="container-fluid">
           <div class="row">
+            <div class="col-sm-6">
+              <h1 class="m-0"><?= $lang === 'en' ? 'Create / Edit Product' : 'Criar / Editar Produto' ?></h1>
+            </div>
           </div>
         </div>
       </div>
@@ -120,11 +120,9 @@ $main_categories = array_filter($all_categories, fn($c) => $c['parent_id'] === n
                   <ul class="nav nav-tabs">
                     <?php foreach ($languages as $idx => $lang_item): ?>
                       <li class="nav-item">
-                        <b><a class="nav-link <?= $idx === 0 ? 'active' : '' ?>"
-                            href="#lang-<?= htmlspecialchars($lang_item['code']) ?>"
-                            data-bs-toggle="tab" style="color: #33d286; ;">
-                            <?= strtoupper($lang_item['code']) ?>
-                          </a></b>
+                        <a class="nav-link <?= $idx === 0 ? 'active' : '' ?>" href="#lang-<?= htmlspecialchars($lang_item['code']) ?>" data-bs-toggle="tab" style="color: #33d286;">
+                          <?= strtoupper($lang_item['code']) ?>
+                        </a>
                       </li>
                     <?php endforeach; ?>
                   </ul>
@@ -138,8 +136,7 @@ $main_categories = array_filter($all_categories, fn($c) => $c['parent_id'] === n
                       $nameValue = $product['name'][$code] ?? '';
                       $descValue = $product['description'][$code] ?? '';
                     ?>
-                      <div class="tab-pane fade <?= $idx === 0 ? 'show active' : '' ?>"
-                        id="lang-<?= htmlspecialchars($code) ?>">
+                      <div class="tab-pane fade <?= $idx === 0 ? 'show active' : '' ?>" id="lang-<?= htmlspecialchars($code) ?>">
 
                         <div class="form-group">
                           <label>
@@ -182,8 +179,8 @@ $main_categories = array_filter($all_categories, fn($c) => $c['parent_id'] === n
               <div class="card-body">
 
                 <div class="row">
-                  <!-- Preço (col-md-4) -->
-                  <div class="col-md-2">
+                  <!-- Preço -->
+                  <div class="col-md-3">
                     <div class="form-group">
                       <label><?= $lang === 'en' ? 'Price (€)' : 'Preço (€)' ?> <span class="text-danger">*</span></label>
                       <input type="number" step="0.01" min="0"
@@ -194,8 +191,8 @@ $main_categories = array_filter($all_categories, fn($c) => $c['parent_id'] === n
                     </div>
                   </div>
 
-                  <!-- Categoria Principal (col-md-4) -->
-                  <div class="col-md-4">
+                  <!-- Categoria Principal -->
+                  <div class="col-md-3">
                     <div class="form-group">
                       <label><?= $lang === 'en' ? 'Category' : 'Categoria' ?> <span class="text-danger">*</span></label>
                       <select name="category_id" id="main_category" class="form-control" required>
@@ -212,16 +209,18 @@ $main_categories = array_filter($all_categories, fn($c) => $c['parent_id'] === n
                     </div>
                   </div>
 
-                  <!-- Subcategoria (col-md-4) -->
-                  <div class="col-md-4">
+                  <!-- Subcategoria -->
+                  <div class="col-md-3">
                     <div class="form-group">
                       <label><?= $lang === 'en' ? 'Subcategory' : 'Subcategoria' ?></label>
                       <select name="subcategory_id" id="sub_category" class="form-control">
-                        <option value=""><?= $lang === 'en' ? '— Select subcategory —' : '— Selecionar subcategoria —' ?></option>
+                        <option value=""><?= $lang === 'en' ? '— Select subcategory (optional) —' : '— Selecionar subcategoria (opcional) —' ?></option>
                       </select>
                     </div>
                   </div>
-                  <div class="col-md-2"> <!-- offset para alinhar com a coluna da direita -->
+
+                  <!-- Status -->
+                  <div class="col-md-3">
                     <div class="form-group">
                       <label><?= $lang === 'en' ? 'Status' : 'Estado' ?></label>
                       <select name="status" class="form-control">
@@ -237,26 +236,23 @@ $main_categories = array_filter($all_categories, fn($c) => $c['parent_id'] === n
                   </div>
                 </div>
 
-                <!-- Thumbnail -->
+                <!-- Thumbnail bonito -->
                 <div class="form-group mt-4">
                   <label><?= $lang === 'en' ? 'Main image (thumbnail)' : 'Imagem principal (thumbnail)' ?></label>
 
-                  <!-- Novo input bonito com AdminLTE/Bootstrap 5 -->
                   <div class="input-group">
                     <input type="file" name="thumbnail" class="form-control" id="thumbnail" accept="image/*">
-                    <label class="input-group-text text-white" for="thumbnail" style="background-color: #33d286;">
+                    <label class="input-group-text bg-success text-white" for="thumbnail" style="background-color: #33d286 !important;">
                       <i class="bi bi-upload me-2"></i>
                       <?= $lang === 'en' ? 'Choose file' : 'Escolher ficheiro' ?>
                     </label>
                   </div>
 
-                  <!-- Nome do ficheiro selecionado (opcional, mas fica bonito) -->
                   <div class="mt-2 small text-muted" id="file-name-display">
                     <?= $lang === 'en' ? 'No file chosen' : 'Nenhum ficheiro selecionado' ?>
                   </div>
 
-                  <!-- Pré-visualização da imagem atual (mantido) -->
-                  <?php if (!empty($product['thumbnail'])): ?>
+                  <?php if (!empty($product['thumbnail']) && $product['thumbnail'] !== '0'): ?>
                     <div class="mt-3">
                       <img src="<?= htmlspecialchars('/' . $product['thumbnail']) ?>"
                         alt="<?= $lang === 'en' ? 'Current thumbnail' : 'Thumbnail atual' ?>"
@@ -268,6 +264,7 @@ $main_categories = array_filter($all_categories, fn($c) => $c['parent_id'] === n
                     </div>
                   <?php endif; ?>
                 </div>
+
               </div>
 
               <div class="card-footer text-right">
@@ -302,12 +299,10 @@ $main_categories = array_filter($all_categories, fn($c) => $c['parent_id'] === n
       const parentId = this.value;
       const subSelect = document.getElementById('sub_category');
 
-      // Sempre mostra o select (não desativa)
-      subSelect.disabled = false;
       subSelect.innerHTML = '<option value=""><?= $lang === 'en' ? '— Select subcategory (optional) —' : '— Selecionar subcategoria (opcional) —' ?></option>';
 
       if (!parentId) {
-        subSelect.innerHTML += '<option value="" disabled><?= $lang === 'en' ? '— Select subcategory (optional) —' : '— Selecione uma categoria primeiro —' ?></option>';
+        subSelect.innerHTML += '<option value="" disabled>— Selecione uma categoria primeiro —</option>';
         return;
       }
 
@@ -318,7 +313,7 @@ $main_categories = array_filter($all_categories, fn($c) => $c['parent_id'] === n
           const option = document.createElement('option');
           option.value = sub.id;
           option.textContent = sub.name['<?= $lang ?>'] || sub.name['pt'] || 'Sem nome';
-          if (<?= json_encode($product['subcategory_id'] ?? '') ?> == sub.id) {
+          if (<?= json_encode($product['subcategory_id'] ?? '') ?> == sub.id.toString()) {
             option.selected = true;
           }
           subSelect.appendChild(option);
@@ -337,26 +332,9 @@ $main_categories = array_filter($all_categories, fn($c) => $c['parent_id'] === n
         document.getElementById('sub_category').innerHTML = '<option value=""><?= $lang === 'en' ? '— Select a category first —' : '— Selecione uma categoria primeiro —' ?></option>';
       }
     });
-
-    // Carrega subcategorias se estiver em modo edição
-    document.addEventListener('DOMContentLoaded', function() {
-      const mainSelect = document.getElementById('main_category');
-      if (mainSelect.value) {
-        mainSelect.dispatchEvent(new Event('change'));
-      }
-    });
   </script>
 
-  <script>
-    document.querySelectorAll('.custom-file-input').forEach(input => {
-      input.addEventListener('change', function(e) {
-        let fileName = e.target.files[0]?.name || '<?= $lang === 'en' ? 'Choose image...' : 'Escolher imagem...' ?>';
-        this.nextElementSibling.textContent = fileName;
-      });
-    });
-  </script>
-
-  <!-- Script para mostrar o nome do ficheiro selecionado -->
+  <!-- Script para nome do ficheiro -->
   <script>
     document.getElementById('thumbnail').addEventListener('change', function(e) {
       const fileName = e.target.files.length > 0 ? e.target.files[0].name : '<?= $lang === 'en' ? 'No file chosen' : 'Nenhum ficheiro selecionado' ?>';
