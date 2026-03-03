@@ -1,5 +1,38 @@
 <?php
+// Iniciar sessão se não estiver iniciada
+if (session_status() === PHP_SESSION_NONE) {
+	session_start();
+}
+
 include("../back/conn.php");
+
+// Definir idioma (padrão português)
+$lang = isset($_SESSION['lang']) ? $_SESSION['lang'] : 'pt';
+
+// Cache de nomes de categorias
+$categories_cache = [];
+function get_category_name($id, $lang, $conn)
+{
+	global $categories_cache;
+	if (isset($categories_cache[$id])) return $categories_cache[$id];
+
+	$stmt = $conn->prepare("SELECT name FROM categories WHERE id = ?");
+	$stmt->bind_param("i", $id);
+	$stmt->execute();
+	$res = $stmt->get_result();
+	$name = '—';
+	if ($row = $res->fetch_assoc()) {
+		$name_json = json_decode($row['name'], true);
+		$name = $name_json[$lang] ?? $name_json['pt'] ?? 'Sem nome';
+	}
+	$categories_cache[$id] = $name;
+	$stmt->close();
+	return $name;
+}
+
+// Base URL para links (ajuste conforme necessário)
+$base_url = ""; // Deixe vazio se for raiz do servidor
+$current_page = "home";
 ?>
 
 <!DOCTYPE HTML>
@@ -137,242 +170,7 @@ include("../back/conn.php");
 	</section>
 	<!--  Promo ITEM END -->
 
-
-	<!-- Start product Area -->
-	<section id="product_area" class="section_padding">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12 text-center">
-					<div class="section_title">
-						<h2>Our <span>Products</span></h2>
-						<div class="divider"></div>
-					</div>
-				</div>
-			</div>
-
-			<div class="text-center">
-				<div class="product_filter">
-					<ul>
-						<li class=" active filter" data-filter="all">ALL</li>
-						<li class="filter" data-filter=".sale">Sale</li>
-						<li class="filter" data-filter=".bslr">Bestseller</li>
-						<li class="filter" data-filter=".ftrd">Featured</li>
-					</ul>
-				</div>
-
-				<div class="product_item">
-					<div class="row">
-						<div class="col-lg-3 col-md-4 col-sm-6 mix sale">
-							<div class="single_product">
-								<div class="product_image">
-									<img src="../assets/img/product/1.jpg" alt="" />
-									<div class="new_badge">New</div>
-									<div class="box-content">
-										<a href="#"><i class="fa fa-heart-o"></i></a>
-										<a href="#"><i class="fa fa-cart-plus"></i></a>
-										<a href="#"><i class="fa fa-search"></i></a>
-									</div>
-								</div>
-
-								<div class="product_btm_text">
-									<h4><a href="#">Product Title</a></h4>
-									<div class="p_rating">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-									</div>
-									<span class="price">$123.00</span>
-
-								</div>
-							</div>
-
-						</div> <!-- End Col -->
-
-						<div class="col-lg-3 col-md-4 col-sm-6  mix ftrd">
-							<div class="single_product">
-								<div class="product_image">
-									<img src="../assets/img/product/2.jpg" alt="" />
-									<div class="new_badge">New</div>
-									<div class="box-content">
-										<a href="#"><i class="fa fa-heart-o"></i></a>
-										<a href="#"><i class="fa fa-cart-plus"></i></a>
-										<a href="#"><i class="fa fa-search"></i></a>
-									</div>
-								</div>
-
-								<div class="product_btm_text">
-									<h4><a href="#">Product Title</a></h4>
-									<div class="p_rating">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-									</div>
-									<span class="price">$123.00</span>
-								</div>
-							</div>
-						</div> <!-- End Col -->
-
-						<div class="col-lg-3 col-md-4 col-sm-6  mix">
-							<div class="single_product">
-								<div class="product_image">
-									<img src="../assets/img/product/3.jpg" alt="" />
-									<div class="new_badge">New</div>
-									<div class="box-content">
-										<a href="#"><i class="fa fa-heart-o"></i></a>
-										<a href="#"><i class="fa fa-cart-plus"></i></a>
-										<a href="#"><i class="fa fa-search"></i></a>
-									</div>
-								</div>
-
-								<div class="product_btm_text">
-									<h4><a href="#">Product Title</a></h4>
-									<div class="p_rating">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-									</div>
-									<span class="price">$123.00</span>
-								</div>
-							</div>
-						</div> <!-- End Col -->
-
-						<div class="col-lg-3 col-md-4 col-sm-6  mix sale bslr">
-							<div class="single_product">
-								<div class="product_image">
-									<img src="../assets/img/product/4.jpg" alt="" />
-									<div class="box-content">
-										<a href="#"><i class="fa fa-heart-o"></i></a>
-										<a href="#"><i class="fa fa-cart-plus"></i></a>
-										<a href="#"><i class="fa fa-search"></i></a>
-									</div>
-								</div>
-
-								<div class="product_btm_text">
-									<h4><a href="#">Product Title</a></h4>
-									<div class="p_rating">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-									</div>
-									<span class="price">$123.00</span>
-								</div>
-							</div>
-						</div> <!-- End Col -->
-
-						<div class="col-lg-3 col-md-4 col-sm-6  mix ftrd">
-							<div class="single_product">
-								<div class="product_image">
-									<img src="../assets/img/product/5.jpg" alt="" />
-									<div class="box-content">
-										<a href="#"><i class="fa fa-heart-o"></i></a>
-										<a href="#"><i class="fa fa-cart-plus"></i></a>
-										<a href="#"><i class="fa fa-search"></i></a>
-									</div>
-								</div>
-
-								<div class="product_btm_text">
-									<h4><a href="#">Product Title</a></h4>
-									<div class="p_rating">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-									</div>
-									<span class="price">$123.00</span>
-								</div>
-							</div>
-						</div> <!-- End Col -->
-
-						<div class="col-lg-3 col-md-4 col-sm-6 mix sale bslr">
-							<div class="single_product">
-								<div class="product_image">
-									<img src="../assets/img/product/6.jpg" alt="" />
-									<div class="box-content">
-										<a href="#"><i class="fa fa-heart-o"></i></a>
-										<a href="#"><i class="fa fa-cart-plus"></i></a>
-										<a href="#"><i class="fa fa-search"></i></a>
-									</div>
-								</div>
-
-								<div class="product_btm_text">
-									<h4><a href="#">Product Title</a></h4>
-									<div class="p_rating">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-									</div>
-									<span class="price">$123.00</span>
-								</div>
-							</div>
-						</div> <!-- End Col -->
-
-						<div class="col-lg-3 col-md-4 col-sm-6 mix sale bslr">
-							<div class="single_product">
-								<div class="product_image">
-									<img src="../assets/img/product/7.jpg" alt="" />
-									<div class="box-content">
-										<a href="#"><i class="fa fa-heart-o"></i></a>
-										<a href="#"><i class="fa fa-cart-plus"></i></a>
-										<a href="#"><i class="fa fa-search"></i></a>
-									</div>
-								</div>
-
-								<div class="product_btm_text">
-									<h4><a href="#">Product Title</a></h4>
-									<div class="p_rating">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-									</div>
-									<span class="price">$123.00</span>
-								</div>
-							</div>
-						</div> <!-- End Col -->
-
-						<div class="col-lg-3 col-md-4 col-sm-6 mix sale bslr">
-							<div class="single_product">
-								<div class="product_image">
-									<img src="../assets/img/product/8.jpg" alt="" />
-									<div class="box-content">
-										<a href="#"><i class="fa fa-heart-o"></i></a>
-										<a href="#"><i class="fa fa-cart-plus"></i></a>
-										<a href="#"><i class="fa fa-search"></i></a>
-									</div>
-								</div>
-
-								<div class="product_btm_text">
-									<h4><a href="#">Product Title</a></h4>
-									<div class="p_rating">
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-									</div>
-									<span class="price">$123.00</span>
-								</div>
-							</div>
-						</div> <!-- End Col -->
-
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- End product Area -->
+	<?php include("products.php"); ?>
 
 	<!-- Special Offer Area -->
 	<div class="special_offer_area gray_section">

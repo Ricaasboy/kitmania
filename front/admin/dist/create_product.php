@@ -2,6 +2,30 @@
 // Inclui conexão + $lang
 include("../../../back/conn.php");
 
+// Força refresh sem cache
+header("Cache-Control: no-cache, must-revalidate");
+header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
+
+// Se vier id na URL → modo edição
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+  $edit_id = intval($_GET['id']);
+  $stmt = $conn->prepare("SELECT * FROM products WHERE id = ?");
+  $stmt->bind_param("i", $edit_id);
+  $stmt->execute();
+  $res = $stmt->get_result();
+  if ($row = $res->fetch_assoc()) {
+    $product = $row;
+    $product['name'] = json_decode($row['name'], true) ?? [];
+    $product['description'] = json_decode($row['description'], true) ?? [];
+    // Status já vem como ENUM ('active' ou 'inactive')
+  } else {
+    $_SESSION['form_errors'][] = $lang === 'en' ? "Product not found" : "Produto não encontrado";
+    header("Location: products.php");
+    exit;
+  }
+  $stmt->close();
+}
+
 // Línguas para as tabs
 $languages = [
   ['code' => 'pt', 'name' => 'Português'],
@@ -16,7 +40,7 @@ $product = $product ?? [
   'price'          => '',
   'category_id'    => '',
   'subcategory_id' => '',
-  'status'         => 'active',
+  'status'         => 'active', // ENUM: active ou inactive
   'thumbnail'      => ''
 ];
 
@@ -112,6 +136,11 @@ $main_categories = array_filter($all_categories, fn($c) => $c['parent_id'] === n
 
           <!-- FORMULÁRIO -->
           <form method="POST" action="../back/save_product.php" enctype="multipart/form-data">
+
+            <!-- Campo oculto ID (só em edição) -->
+            <?php if (!empty($product['id'])): ?>
+              <input type="hidden" name="id" value="<?= htmlspecialchars($product['id']) ?>">
+            <?php endif; ?>
 
             <!-- CARD 1: CAMPOS TRADUZÍVEIS -->
             <?php if (!empty($languages)): ?>
@@ -219,16 +248,18 @@ $main_categories = array_filter($all_categories, fn($c) => $c['parent_id'] === n
                     </div>
                   </div>
 
-                  <!-- Status -->
+                  <!-- Status - ENUM -->
                   <div class="col-md-3">
                     <div class="form-group">
                       <label><?= $lang === 'en' ? 'Status' : 'Estado' ?></label>
                       <select name="status" class="form-control">
-                        <?php $current = $product['status'] ?? 'active'; ?>
-                        <option value="active" <?= $current === 'active'   ? 'selected' : '' ?>>
+                        <?php
+                        $current_status = $product['status'] ?? 'active';
+                        ?>
+                        <option value="active" <?= $current_status === 'active' ? 'selected' : '' ?>>
                           <?= $lang === 'en' ? 'Active' : 'Ativo' ?>
                         </option>
-                        <option value="inactive" <?= $current === 'inactive' ? 'selected' : '' ?>>
+                        <option value="inactive" <?= $current_status === 'inactive' ? 'selected' : '' ?>>
                           <?= $lang === 'en' ? 'Inactive' : 'Inativo' ?>
                         </option>
                       </select>
@@ -236,16 +267,40 @@ $main_categories = array_filter($all_categories, fn($c) => $c['parent_id'] === n
                   </div>
                 </div>
 
-                <!-- Thumbnail bonito -->
+                <!-- Thumbnail -->
                 <div class="form-group mt-4">
                   <label><?= $lang === 'en' ? 'Main image (thumbnail)' : 'Imagem principal (thumbnail)' ?></label>
 
-                  <div class="input-group">
-                    <input type="file" name="thumbnail" class="form-control" id="thumbnail" accept="image/*">
-                    <label class="input-group-text bg-success text-white" for="thumbnail" style="background-color: #33d286 !important;">
-                      <i class="bi bi-upload me-2"></i>
-                      <?= $lang === 'en' ? 'Choose file' : 'Escolher ficheiro' ?>
-                    </label>
+                  <!-- Thumbnail bonito -->
+                  <div class="form-group mt-4">
+                    <label><?= $lang === 'en' ? 'Main image (thumbnail)' : 'Imagem principal (thumbnail)' ?></label>
+
+                    <!-- Input file original escondido -->
+                    <input type="file" name="thumbnail" class="d-none" id="thumbnail" accept="image/*">
+
+                    <!-- Botão customizado -->
+                    <div class="input-group">
+                      <span class="input-group-text" id="file-name-display" style="flex: 1; justify-content: flex-start; background-color: #f8f9fa;">
+                        <?= $lang === 'en' ? 'No file chosen' : 'Nenhum ficheiro selecionado' ?>
+                      </span>
+                      <button type="button" class="btn btn-success text-white" id="custom-file-button" style="background-color: #33d286 !important; border-color: #33d286;" onclick="document.getElementById('thumbnail').click();">
+                        <i class="bi bi-upload me-2"></i>
+                        <?= $lang === 'en' ? 'Choose file' : 'Escolher ficheiro' ?>
+                      </button>
+                    </div>
+
+                    <!-- Preview da imagem atual -->
+                    <?php if (!empty($product['thumbnail']) && $product['thumbnail'] !== '0'): ?>
+                      <div class="mt-3">
+                        <img src="<?= htmlspecialchars('/' . $product['thumbnail']) ?>"
+                          alt="<?= $lang === 'en' ? 'Current thumbnail' : 'Thumbnail atual' ?>"
+                          class="img-thumbnail"
+                          style="max-height:140px; object-fit: cover;">
+                        <small class="text-muted d-block mt-1">
+                          <?= $lang === 'en' ? 'Current image' : 'Imagem atual' ?>
+                        </small>
+                      </div>
+                    <?php endif; ?>
                   </div>
 
                   <div class="mt-2 small text-muted" id="file-name-display">
@@ -302,7 +357,6 @@ $main_categories = array_filter($all_categories, fn($c) => $c['parent_id'] === n
       subSelect.innerHTML = '<option value=""><?= $lang === 'en' ? '— Select subcategory (optional) —' : '— Selecionar subcategoria (opcional) —' ?></option>';
 
       if (!parentId) {
-        subSelect.innerHTML += '<option value="" disabled>— Selecione uma categoria primeiro —</option>';
         return;
       }
 
@@ -318,8 +372,6 @@ $main_categories = array_filter($all_categories, fn($c) => $c['parent_id'] === n
           }
           subSelect.appendChild(option);
         });
-      } else {
-        subSelect.innerHTML += '<option value="" disabled selected><?= $lang === 'en' ? '— This category has no subcategories —' : '— Esta categoria não tem subcategorias —' ?></option>';
       }
     });
 
@@ -328,8 +380,6 @@ $main_categories = array_filter($all_categories, fn($c) => $c['parent_id'] === n
       const mainSelect = document.getElementById('main_category');
       if (mainSelect.value) {
         mainSelect.dispatchEvent(new Event('change'));
-      } else {
-        document.getElementById('sub_category').innerHTML = '<option value=""><?= $lang === 'en' ? '— Select a category first —' : '— Selecione uma categoria primeiro —' ?></option>';
       }
     });
   </script>

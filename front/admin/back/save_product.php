@@ -29,7 +29,7 @@ if (empty($name_en)) $errors[] = $lang === 'en' ? "Product name (EN) is required
 if ($price <= 0) $errors[] = $lang === 'en' ? "Price must be greater than 0" : "O preço deve ser maior que 0";
 if ($category_id <= 0) $errors[] = $lang === 'en' ? "Please select a category" : "Selecione uma categoria";
 
-// Validação da subcategoria (se enviada, verifica se existe)
+// Validação da subcategoria
 if ($subcategory_id !== null && $subcategory_id > 0) {
     $check = $conn->prepare("SELECT 1 FROM categories WHERE id = ? AND status = 'active'");
     $check->bind_param("i", $subcategory_id);
@@ -43,10 +43,15 @@ if ($subcategory_id !== null && $subcategory_id > 0) {
     $check->close();
 }
 
+// Validação do status (já é ENUM, só garantimos que é válido)
+if (!in_array($status, ['active', 'inactive'])) {
+    $status = 'active'; // fallback seguro
+}
+
 if (!empty($errors)) {
     $_SESSION['form_errors'] = $errors;
     $_SESSION['form_data']   = $_POST;
-    header("Location: ../dist/create_product.php");
+    header("Location: ../dist/create_product.php" . ($id > 0 ? "?id=" . $id : ""));
     exit;
 }
 
@@ -56,9 +61,23 @@ $name_json = json_encode(['pt' => $name_pt, 'en' => $name_en], JSON_UNESCAPED_UN
 $desc_json = json_encode(['pt' => $desc_pt, 'en' => $desc_en], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
 // =============================================
-// Upload da thumbnail – BLOCO FINAL QUE FUNCIONA
-$thumbnail_path = '0';
+// Upload da thumbnail
+$thumbnail_path = '0';  // default
 
+// Se for edição e não enviou nova imagem, manter a antiga
+if ($id > 0 && (!isset($_FILES['thumbnail']) || $_FILES['thumbnail']['error'] !== UPLOAD_ERR_OK || empty($_FILES['thumbnail']['name']))) {
+    // Buscar thumbnail atual
+    $stmt = $conn->prepare("SELECT thumbnail FROM products WHERE id = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    if ($row = $res->fetch_assoc()) {
+        $thumbnail_path = $row['thumbnail'];
+    }
+    $stmt->close();
+}
+
+// Processar novo upload se existir
 if (isset($_FILES['thumbnail']) && $_FILES['thumbnail']['error'] === UPLOAD_ERR_OK && !empty($_FILES['thumbnail']['name'])) {
     $upload_dir_relative = 'assets/img/products/';
     $upload_dir_absolute = __DIR__ . '/../../../' . $upload_dir_relative;
@@ -80,36 +99,42 @@ if (isset($_FILES['thumbnail']) && $_FILES['thumbnail']['error'] === UPLOAD_ERR_
 }
 
 // =============================================
-// Guardar na base de dados – FORÇA ATUALIZAÇÃO DO THUMBNAIL
+// Guardar na base de dados
 if ($id > 0) {
-    // UPDATE
+    // UPDATE – modo edição
     $sql = "UPDATE products SET 
                 name            = ?,
                 description     = ?,
                 price           = ?,
                 category_id     = ?,
                 subcategory_id  = ?,
-                status          = ?,
-                thumbnail       = ?";  // SEMPRE atualiza thumbnail
-    $types  = 'ssdisis';
-    $params = [$name_json, $desc_json, $price, $category_id, $subcategory_id, $status, $thumbnail_path];
+                status          = ?";
+    $types  = 'ssdiss';
+    $params = [$name_json, $desc_json, $price, $category_id, $subcategory_id, $status];
+
+    // Só atualiza thumbnail se nova imagem foi enviada
+    if ($thumbnail_path !== '0' && isset($_FILES['thumbnail']) && $_FILES['thumbnail']['error'] === UPLOAD_ERR_OK) {
+        $sql .= ", thumbnail = ?";
+        $params[] = $thumbnail_path;
+        $types   .= 's';
+    }
 
     $sql .= " WHERE id = ?";
     $params[] = $id;
     $types   .= 'i';
 } else {
-    // INSERT
+    // INSERT – criação nova
     $sql = "INSERT INTO products 
                 (name, description, price, category_id, subcategory_id, status, thumbnail) 
             VALUES (?, ?, ?, ?, ?, ?, ?)";
-    $types  = 'ssdisis';
+    $types  = 'ssdissi';
     $params = [$name_json, $desc_json, $price, $category_id, $subcategory_id, $status, $thumbnail_path];
 }
 
 $stmt = $conn->prepare($sql);
 if (!$stmt) {
     $_SESSION['form_errors'][] = $lang === 'en' ? "Database prepare error: " . $conn->error : "Erro ao preparar query: " . $conn->error;
-    header("Location: ../dist/create_product.php");
+    header("Location: ../dist/create_product.php" . ($id > 0 ? "?id=" . $id : ""));
     exit;
 }
 
@@ -117,11 +142,19 @@ $stmt->bind_param($types, ...$params);
 
 if ($stmt->execute()) {
     $_SESSION['success'] = $lang === 'en' ? "Product saved successfully!" : "Produto guardado com sucesso!";
+
+    // Se foi inserção nova, pegar o ID gerado
+    if ($id == 0) {
+        $id = $stmt->insert_id;
+    }
+
+    // Redirect com id para recarregar dados frescos em edição
+    header("Location: ../dist/create_product.php?id=" . $id . "&success=1");
 } else {
     $_SESSION['form_errors'][] = $lang === 'en' ? "Database error: " . $stmt->error : "Erro na BD: " . $stmt->error;
+    header("Location: ../dist/create_product.php" . ($id > 0 ? "?id=" . $id : ""));
 }
 
 $stmt->close();
-
-header("Location: ../dist/create_product.php");
+$conn->close();
 exit;
