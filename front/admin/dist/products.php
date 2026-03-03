@@ -7,7 +7,7 @@ header("Cache-Control: no-cache, must-revalidate");
 header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 
 // Número de produtos por página
-$per_page = 20;
+$per_page = 5;
 
 // Página atual
 $page = isset($_GET['page']) && is_numeric($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
@@ -66,8 +66,9 @@ function get_category_name($id, $lang, $conn)
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="./css/adminlte.css">
 
+  <!-- Todos os estilos no head -->
   <style>
-    /* Botão de ação circular: fundo transparente, borda e ícone cinza claro */
+    /* Botão de ação circular */
     .btn-circle-action {
       background-color: transparent !important;
       border: 2px solid #adb5bd;
@@ -87,6 +88,33 @@ function get_category_name($id, $lang, $conn)
       background-color: transparent !important;
       border-color: #33d286 !important;
       color: #33d286 !important;
+    }
+
+    /* Pesquisa simples: apenas linha inferior, texto preto, no limite direito */
+    .search-container {
+      position: relative;
+      width: 280px;
+      max-width: 100%;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 10px 12px;
+      font-size: 16px;
+      border: none;
+      border-bottom: 2px solid #adb5bd;
+      background: transparent;
+      color: #000000 !important;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    .search-input::placeholder {
+      color: #6c757d;
+    }
+
+    .search-input:focus {
+      border-bottom-color: #33d286;
     }
   </style>
 </head>
@@ -114,12 +142,23 @@ function get_category_name($id, $lang, $conn)
           <div class="row">
             <div class="col-md-12">
               <div class="card mb-4">
-                <div class="card-header">
-                  <h3 class="card-title"><?php echo $lang === 'en' ? 'Products' : 'Produtos'; ?></h3>
+                <div class="card-header d-flex align-items-center justify-content-between">
+                  <h3 class="card-title mb-0">
+                    <?php echo $lang === 'en' ? 'Products' : 'Produtos'; ?>
+                  </h3>
+
+                  <!-- Pesquisa no limite direito -->
+                  <div class="search-container ms-auto">
+                    <input
+                      type="text"
+                      id="searchInput"
+                      class="search-input"
+                      placeholder="<?php echo $lang === 'en' ? 'Search...' : 'Pesquisar...'; ?>">
+                  </div>
                 </div>
 
                 <div class="card-body">
-                  <table class="table table-bordered">
+                  <table class="table table-bordered" id="productsTable">
                     <thead>
                       <tr>
                         <th style="width: 1px"><?php echo $lang === 'en' ? 'Thumbnail' : 'Imagem'; ?></th>
@@ -139,7 +178,10 @@ function get_category_name($id, $lang, $conn)
                           $sub_name = $row['subcategory_id'] ? get_category_name($row['subcategory_id'], $lang, $conn) : '';
                           $categories = $cat_name . ($sub_name ? ' / ' . $sub_name : '');
                           ?>
-                          <tr class="align-middle">
+                          <tr class="align-middle product-row"
+                            data-name="<?= htmlspecialchars(strtolower($product_name)) ?>"
+                            data-category="<?= htmlspecialchars(strtolower($cat_name)) ?>"
+                            data-subcategory="<?= htmlspecialchars(strtolower($sub_name)) ?>">
                             <td>
                               <?php if ($row['thumbnail'] && $row['thumbnail'] !== '0'): ?>
                                 <img src="<?= htmlspecialchars('../../../' . $row['thumbnail']) ?>" alt="Thumbnail" style="max-height:140px; border:1px solid #ddd; border-radius:4px;">
@@ -151,7 +193,6 @@ function get_category_name($id, $lang, $conn)
                             <td><?= htmlspecialchars($categories) ?></td>
                             <td class="text-center">
                               <div class="d-flex align-items-center justify-content-center gap-2">
-
                                 <a href="view_product.php?id=<?= $row['id'] ?>"
                                   class="btn btn-circle-action rounded-circle d-flex align-items-center justify-content-center"
                                   style="width: 40px; height: 40px;">
@@ -173,7 +214,6 @@ function get_category_name($id, $lang, $conn)
                                     <i style="padding-top: 5px;" class="bi bi-trash fs-5"></i>
                                   </button>
                                 </form>
-
                               </div>
                             </td>
                           </tr>
@@ -206,6 +246,7 @@ function get_category_name($id, $lang, $conn)
                     <?php endif; ?>
                   </ul>
 
+                  <!-- Botão + no lugar original (rodapé, esquerda) -->
                   <a href="create_product.php">
                     <button type="button" class="btn btn-circle-action rounded-circle d-flex align-items-center justify-content-center"
                       style="width: 30px; height: 30px; margin-right: 1570px">
@@ -228,6 +269,27 @@ function get_category_name($id, $lang, $conn)
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js"></script>
   <script src="./js/adminlte.js"></script>
+
+  <!-- Filtro em tempo real (nome + categoria + subcategoria) -->
+  <script>
+    document.getElementById('searchInput')?.addEventListener('input', function(e) {
+      const filter = e.target.value.toLowerCase().trim();
+      const rows = document.querySelectorAll('#productsTable tbody tr.product-row');
+
+      rows.forEach(row => {
+        const name = row.getAttribute('data-name') || '';
+        const category = row.getAttribute('data-category') || '';
+        const subcategory = row.getAttribute('data-subcategory') || '';
+
+        // Procura em qualquer um dos campos
+        const match = name.includes(filter) ||
+          category.includes(filter) ||
+          subcategory.includes(filter);
+
+        row.style.display = match ? '' : 'none';
+      });
+    });
+  </script>
 
   <script>
     const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';

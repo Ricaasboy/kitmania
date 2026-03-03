@@ -222,14 +222,16 @@
                 aria-label="Main navigation"
                 data-accordion="false"
                 id="navigation">
-                <li class="nav-item menu-open">
+                <li class="nav-item">
                     <a href="../../home.php" class="nav-link">
                         <i class="bi bi-chevron-left"></i>
                         <p style="padding-left: 15px;">
                             <?php echo $lang === 'en' ? 'Back' : 'Voltar'; ?>
                         </p>
                     </a>
-                    <a href="#" class="nav-link">
+                </li>
+                <li class="nav-item">
+                    <a href="dashboard.php" class="nav-link">
                         <i class="nav-icon bi bi-gear-fill"></i>
                         <p>
                             <?php echo $lang === 'en' ? 'Dashboard' : 'Painel'; ?>
